@@ -1,0 +1,75 @@
+﻿<Window x:Class="SecureChatAppTestUI.Views.IpEndpointView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecureChatAppTestUI.Views"
+        xmlns:VM="clr-namespace:SecureChatAppTestUI.ViewModels"
+        xmlns:converters="clr-namespace:SecureChatAppTestUI.Converters"
+        mc:Ignorable="d"
+        Title="Chat App v1.0" Height="250" Width="350" Background="LightGreen" ResizeMode="CanMinimize"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Window.DataContext>
+        <VM:IpEndpointVM></VM:IpEndpointVM>
+    </Window.DataContext>
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="btvConverter"
+                                              VisibleValue="Visible"
+                                              HiddenValue="Hidden"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Session Invalid Text -->
+        <!--<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="5 0 0 5" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Foreground="Red" FontWeight="Bold" Text="{Binding SessionInvalidText, UpdateSourceTrigger=PropertyChanged}" />-->
+
+        <!--Server - Client Radio buttons-->
+        <RadioButton Grid.Row="1" Grid.Column="2" Margin="5 5 0 0" FontSize="16" IsChecked="{Binding ServerRadioButton, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">Server</RadioButton>
+        <RadioButton Grid.Row="1" Grid.Column="2" Margin="5 5 0 0" FontSize="16" IsChecked="{Binding ClientRadioButton, UpdateSourceTrigger=PropertyChanged}" 
+                     VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right">Client</RadioButton>
+
+        <!--IP Address Entry-->
+        <TextBlock Text="IP Address" Grid.Row="2" Grid.Column="1" Margin="5 5 0 0" HorizontalAlignment="Right" FontSize="16"/>
+        
+        <TextBox Grid.Row="2" Grid.Column="2" Width="150" Margin="5 5 0 0" Text="{Binding IpAddressInput}" FontSize="16" 
+                 Visibility="{Binding IsIpAddressTextBoxVisible, Converter={StaticResource btvConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <ComboBox Grid.Row="2" Grid.Column="2" Width="150" Margin="5 5 0 0" ItemsSource="{Binding IpAddressComboBox}" FontSize="16"
+                  Visibility="{Binding IsIpAddressComboBoxVisible}" SelectedItem="{Binding IpComboBoxSelectedItem}" />
+
+        <!--Port Number Entry-->
+        <TextBlock Text="Port" Grid.Row="3" Grid.Column="1" Margin="5 5 0 0" HorizontalAlignment="Right" FontSize="16" />
+        <TextBox Grid.Row="3" Grid.Column="2" Width="150" Margin="5 5 0 0" Text="{Binding PortInput, UpdateSourceTrigger=PropertyChanged}" FontSize="16" />
+
+        <!--Session ID Entry-->
+        <TextBlock Text="Session ID" Grid.Row="4" Grid.Column="1" Margin="5 5 0 0" HorizontalAlignment="Right" FontSize="16"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Width="150" Margin="5 5 0 0" Text="{Binding SessionIdInput, UpdateSourceTrigger=PropertyChanged}" FontSize="16" MaxLength="128" />
+
+        <!--Username Entry-->
+        <TextBlock Text="Username" Grid.Row="5" Grid.Column="1" Margin="5 5 0 0" HorizontalAlignment="Right" FontSize="16"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Width="150" Margin="5 5 0 0" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" FontSize="16" MaxLength="15"/>
+
+        <!--Begin Session Button-->
+        <Button x:Name="BeginSessionButton" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Center" Width="120" Height="30"
+                Background="Black" Foreground="White" Content="Begin Session"
+                Margin="5 5 0 0" FontSize="16" Click="BeginSessionButton_Click"/>
+
+    </Grid>
+</Window>
